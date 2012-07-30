@@ -1,0 +1,282 @@
+#N canvas 79 57 1140 605 10;
+#X obj 55 11 hid;
+#X msg 46 -10 open \$1;
+#X obj 55 -51 hradio 15 1 0 10 empty empty empty 0 -8 0 10 -262144
+-1 -1 0;
+#X floatatom 55 -30 5 0 0 0 - - -;
+#X msg 121 -10 refresh;
+#X msg 121 11 print;
+#X obj 121 -29 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X floatatom 104 454 5 0 0 0 - - -;
+#X text 44 454 X;
+#X text 93 454 Y;
+#X floatatom 55 454 5 0 0 0 - - -;
+#X obj 283 -51 nbx 5 30 -1e+37 1e+37 0 0 empty x-axis x-axis 0 -12
+0 20 -262144 -1 -1 124 256;
+#X obj 393 -51 nbx 5 30 -1e+37 1e+37 0 0 empty y-axis y-axis 0 -12
+0 20 -262144 -1 -1 124 256;
+#X obj 55 474 s x-axis;
+#X obj 115 474 s y-axis;
+#X floatatom 154 454 5 0 0 0 - - -;
+#X obj 55 433 route abs_x abs_y abs_z abs_rz;
+#X floatatom 204 454 5 0 0 0 - - -;
+#X obj 174 474 s x-axis_r;
+#X obj 244 474 s y-axis_r;
+#X obj 283 9 nbx 5 30 -1e+37 1e+37 0 0 empty x-axis_r x-axis 0 -12
+0 20 -262144 -1 -1 130 256;
+#X obj 393 9 nbx 5 30 -1e+37 1e+37 0 0 empty y-axis_r y-axis 0 -12
+0 20 -262144 -1 -1 127 256;
+#X text 686 402 X --> btn_14;
+#X text 686 412 D --> btn_15;
+#X text 686 382 A --> btn_12;
+#X text 686 392 O --> btn_13;
+#X text 576 402 Abajo --> btn_6;
+#X text 576 412 Izq --> btn_7;
+#X text 576 382 Arriba --> btn_4;
+#X text 576 392 Dcha --> btn_5;
+#X text 576 342 L3 --> btn_1;
+#X text 576 352 R3 --> btn_2;
+#X text 576 332 Select --> btn_0;
+#X text 576 362 Start --> btn_3;
+#X text 686 332 L2 --> btn_8;
+#X text 686 342 R2 --> btn_9;
+#X text 686 352 L1 --> btn_10;
+#X text 686 362 R1 --> btn_11;
+#X text 686 432 PS --> btn_16;
+#X obj 283 164 i;
+#X floatatom 355 165 5 0 0 0 - - -;
+#X obj 283 214 i;
+#X floatatom 355 215 5 0 0 0 - - -;
+#X obj 283 184 t f b;
+#X floatatom 355 255 5 0 0 0 - - -;
+#X text 387 257 <.. Sin(n-2);
+#X text 387 217 <.. Sin(n-1);
+#X text 389 167 <.. Sin(n);
+#X obj 355 234 s Sin(n-1);
+#X obj 355 274 s Sin(n-2);
+#X obj 283 134 t f b;
+#X obj 283 114 i;
+#X text 183 135 Input buffer----;
+#N canvas 0 22 513 413 notas 0;
+#X obj 93 77 inlet;
+#X obj 133 77 inlet;
+#X obj 93 267 outlet;
+#X obj 117 104 >> 1;
+#X obj 117 125 change;
+#X obj 117 147 i;
+#X obj 167 104 >> 1;
+#X obj 167 125 change;
+#X obj 167 147 i;
+#X obj 117 229 list;
+#X obj 117 176 makenote 40 1;
+#X msg 117 197 144 \$1;
+#X connect 0 0 3 0;
+#X connect 1 0 6 0;
+#X connect 3 0 4 0;
+#X connect 4 0 5 0;
+#X connect 5 0 10 0;
+#X connect 6 0 7 0;
+#X connect 7 0 8 0;
+#X connect 8 0 10 1;
+#X connect 9 0 2 0;
+#X connect 10 0 11 0;
+#X connect 10 1 9 1;
+#X connect 11 0 9 0;
+#X restore 504 -51 pd notas;
+#X obj 504 22 s midiStream;
+#X text 266 -44 L;
+#X text 266 16 R;
+#X obj 137 60 route DESKTOP1;
+#X obj 438 114 cup;
+#X msg 469 114 0;
+#X floatatom 438 138 5 0 0 0 - - -;
+#X obj 505 163 bang;
+#X obj 505 188 i;
+#X obj 505 218 i;
+#X obj 505 248 i;
+#X floatatom 534 189 5 0 0 0 - - -;
+#X floatatom 534 219 5 0 0 0 - - -;
+#X floatatom 534 249 5 0 0 0 - - -;
+#X obj 505 137 select 2;
+#N canvas 0 22 450 300 pruebaDESKTOP 0;
+#X obj 292 95 trigger float float;
+#X obj 346 265 mapping/tolist;
+#X obj 88 222 select 0;
+#X obj 19 188 float;
+#X obj 57 188 - 1;
+#X obj 19 128 trigger bang float;
+#X obj 241 64 route 247;
+#X obj 241 85 bang;
+#X text 81 22 Status (command) bytes -->;
+#X text 143 221 <-- Camino para instrucciones explícitas;
+#X obj 64 43 send \$0-cmdbyte;
+#X obj 241 43 r \$0-cmdbyte;
+#X obj 88 243 send \$0-explicitStatus;
+#X obj 427 212 r \$0-explicitStatus;
+#X obj 19 22 moses 40;
+#X connect 0 0 5 0;
+#X connect 2 0 12 0;
+#X connect 3 0 4 0;
+#X connect 3 0 2 0;
+#X connect 4 0 3 1;
+#X connect 5 0 3 0;
+#X connect 5 1 1 0;
+#X connect 6 0 7 0;
+#X connect 6 1 0 0;
+#X connect 7 0 1 1;
+#X connect 11 0 6 0;
+#X connect 13 0 1 1;
+#X connect 14 0 5 0;
+#X connect 14 1 10 0;
+#X restore 341 401 pd pruebaDESKTOP;
+#X obj 316 474 tgl 25 0 empty empty empty 0 -6 0 8 -195568 -1 -1 0
+1;
+#X obj 346 474 tgl 25 0 empty empty empty 0 -6 0 8 -195568 -1 -1 0
+1;
+#X obj 376 474 tgl 25 0 empty empty empty 0 -6 0 8 -195568 -1 -1 0
+1;
+#X obj 406 474 tgl 25 0 empty empty empty 0 -6 0 8 -195568 -1 -1 0
+1;
+#X obj 436 474 tgl 25 0 empty empty empty 0 -6 0 8 -195568 -1 -1 0
+1;
+#X obj 466 474 tgl 25 0 empty empty empty 0 -6 0 8 -195568 -1 -1 0
+1;
+#X obj 496 474 tgl 25 0 empty empty empty 0 -6 0 8 -195568 -1 -1 0
+1;
+#X obj 526 474 tgl 25 0 empty empty empty 0 -6 0 8 -195568 -1 -1 0
+1;
+#X obj 556 474 tgl 25 0 empty empty empty 0 -6 0 8 -195568 -1 -1 0
+1;
+#X obj 586 474 tgl 25 0 empty empty empty 0 -6 0 8 -195568 -1 -1 0
+1;
+#X obj 616 474 tgl 25 0 empty empty empty 0 -6 0 8 -195568 -1 -1 0
+1;
+#X obj 646 474 tgl 25 0 empty empty empty 0 -6 0 8 -195568 -1 -1 0
+1;
+#X obj 676 474 tgl 25 0 empty empty empty 0 -6 0 8 -195568 -1 -1 0
+1;
+#X obj 706 474 tgl 25 0 empty empty empty 0 -6 0 8 -195568 -1 -1 0
+1;
+#X obj 736 474 tgl 25 0 empty empty empty 0 -6 0 8 -195568 -1 -1 0
+1;
+#X obj 766 474 tgl 25 0 empty empty empty 0 -6 0 8 -195568 -1 -1 0
+1;
+#X obj 316 432 route btn_0 btn_1 btn_2 btn_3 btn_4 btn_5 btn_6 btn_7
+btn_8 btn_9 btn_10 btn_11 btn_12 btn_13 btn_14 btn_15 btn_16;
+#X obj 796 474 tgl 25 0 empty empty empty 0 -6 0 8 -195568 -1 -1 0
+1;
+#X obj 55 38 route abs key DESKTOP;
+#X obj 355 184 s Sin(n);
+#X msg 842 335 add \$1;
+#X obj 842 400 textfile;
+#X msg 904 323 write log.txt;
+#X msg 904 347 read log.txt;
+#X msg 904 371 clear;
+#X obj 855 455 tabwrite Input;
+#X obj 1000 415 cup;
+#X text 933 400 <.. 8KHz;
+#X obj 936 434 r clock;
+#X obj 1000 477 s clock;
+#X msg 1030 415 0;
+#X floatatom 1051 478 5 0 0 0 - - -;
+#X obj 1030 456 delay 0;
+#N canvas 0 22 450 300 (subpatch) 0;
+#X array Input 100 float 1;
+#A 0 144 1 1 255 231 235 235 236 236 235 235 232 232 2 2 0 145 145
+236 144 144 1 1 255 143 235 144 144 231 231 232 232 231 231 236 236
+235 235 236 236 232 232 2 2 0 235 1 1 255 2 2 0 1 1 255 2 2 0 236 236
+1 1 255 235 2 2 0 143 143 144 144 1 1 255 231 231 236 144 1 1 255 231
+235 235 236 236 235 235 232 232 231 231 2 2 0 232 236 236 145 144;
+#X coords 0 300 99 0 500 300 1;
+#X restore 604 -56 graph;
+#X obj 137 81 s desk;
+#X obj 283 91 r desk;
+#X obj 904 300 print;
+#X obj 1035 261 r desk;
+#X obj 1000 382 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 1030 436 sel 99;
+#X connect 0 0 88 0;
+#X connect 1 0 0 0;
+#X connect 2 0 3 0;
+#X connect 3 0 1 0;
+#X connect 4 0 0 0;
+#X connect 5 0 0 0;
+#X connect 6 0 0 0;
+#X connect 7 0 14 0;
+#X connect 10 0 13 0;
+#X connect 11 0 53 0;
+#X connect 15 0 18 0;
+#X connect 16 0 10 0;
+#X connect 16 1 7 0;
+#X connect 16 2 15 0;
+#X connect 16 3 17 0;
+#X connect 17 0 19 0;
+#X connect 20 0 53 1;
+#X connect 39 0 43 0;
+#X connect 40 0 62 1;
+#X connect 40 0 89 0;
+#X connect 41 0 44 0;
+#X connect 42 0 48 0;
+#X connect 42 0 63 1;
+#X connect 43 0 41 1;
+#X connect 43 0 42 0;
+#X connect 43 1 41 0;
+#X connect 44 0 49 0;
+#X connect 44 0 64 1;
+#X connect 50 0 39 1;
+#X connect 50 0 40 0;
+#X connect 50 1 39 0;
+#X connect 50 1 58 0;
+#X connect 51 0 50 0;
+#X connect 53 0 54 0;
+#X connect 57 0 104 0;
+#X connect 58 0 60 0;
+#X connect 58 0 68 0;
+#X connect 59 0 58 0;
+#X connect 61 0 62 0;
+#X connect 61 0 63 0;
+#X connect 61 0 64 0;
+#X connect 62 0 65 0;
+#X connect 63 0 66 0;
+#X connect 64 0 67 0;
+#X connect 68 0 59 0;
+#X connect 68 0 61 0;
+#X connect 86 0 70 0;
+#X connect 86 1 71 0;
+#X connect 86 2 72 0;
+#X connect 86 3 73 0;
+#X connect 86 4 74 0;
+#X connect 86 5 75 0;
+#X connect 86 6 76 0;
+#X connect 86 7 77 0;
+#X connect 86 8 78 0;
+#X connect 86 9 79 0;
+#X connect 86 10 80 0;
+#X connect 86 11 81 0;
+#X connect 86 12 82 0;
+#X connect 86 13 83 0;
+#X connect 86 14 84 0;
+#X connect 86 15 85 0;
+#X connect 86 16 87 0;
+#X connect 88 0 16 0;
+#X connect 88 1 86 0;
+#X connect 88 2 57 0;
+#X connect 90 0 91 0;
+#X connect 92 0 91 0;
+#X connect 93 0 91 0;
+#X connect 94 0 91 0;
+#X connect 96 0 101 0;
+#X connect 96 0 109 0;
+#X connect 98 0 95 1;
+#X connect 100 0 96 0;
+#X connect 101 0 99 0;
+#X connect 102 0 100 0;
+#X connect 105 0 51 0;
+#X connect 107 0 95 0;
+#X connect 107 0 108 0;
+#X connect 107 0 90 0;
+#X connect 107 0 106 0;
+#X connect 108 0 96 0;
+#X connect 109 0 102 0;

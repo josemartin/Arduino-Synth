@@ -1,0 +1,49 @@
+#N canvas 461 511 737 342 10;
+#X obj -139 208 s samplemap.load;
+#X obj 72 14 r \$0.array;
+#X obj 71 305 outlet;
+#X obj 72 40 unpack f f;
+#X obj 72 92 f;
+#X obj 74 212 f;
+#X obj 75 124 until;
+#X obj 74 160 counter;
+#X obj 72 66 t b f b;
+#X obj 74 186 t b f;
+#X obj 46 234 sprintf %d.samplemap.mem.%d;
+#X obj 61 283 repack;
+#X obj 177 301 outlet channels;
+#X obj -120 33 Samplemap;
+#X obj 35 260 symbol;
+#X text 217 146 outlet 1: list of array names as symbols corresponding
+to the loaded file. It's 1 array per channel.;
+#X text 217 182 outlet 2: the number of channels in the wav file.;
+#X obj -44 101 inlet remax;
+#X text 218 39 inlet 1: Filename of wav to be loaded \, it is required.
+;
+#X text 218 62 inlet 2: Remax array. Must be either 0 or 1 If 1 it
+will load the entire wav onto memory instead of limiting it to 4e+06
+samples. This parameter is optional \, default is 0;
+#X obj -136 166 pack s \$0 f;
+#X obj -131 77 inlet filename;
+#X obj -128 117 spacefix;
+#X connect 1 0 3 0;
+#X connect 3 0 8 0;
+#X connect 3 1 4 1;
+#X connect 3 1 11 1;
+#X connect 3 1 12 0;
+#X connect 4 0 6 0;
+#X connect 5 0 10 0;
+#X connect 6 0 7 0;
+#X connect 7 0 9 0;
+#X connect 8 0 4 0;
+#X connect 8 1 5 1;
+#X connect 8 2 7 2;
+#X connect 9 0 5 0;
+#X connect 9 1 10 1;
+#X connect 10 0 14 0;
+#X connect 11 0 2 0;
+#X connect 14 0 11 0;
+#X connect 17 0 20 2;
+#X connect 20 0 0 0;
+#X connect 21 0 22 0;
+#X connect 22 0 20 0;

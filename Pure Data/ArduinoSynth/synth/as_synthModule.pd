@@ -1,0 +1,331 @@
+#N canvas 41 119 977 696 10;
+#X declare -lib mrpeach;
+#X declare -lib cyclone;
+#X declare -lib cyclone;
+#X declare -lib cyclone;
+#X declare -lib cyclone;
+#X declare -lib cyclone;
+#X declare -lib cyclone;
+#X declare -lib cyclone;
+#X declare -lib cyclone;
+#X declare -lib cyclone;
+#X declare -lib cyclone;
+#X declare -lib cyclone;
+#X declare -lib cyclone;
+#X declare -lib cyclone;
+#X declare -lib cyclone;
+#X declare -lib cyclone;
+#X declare -lib cyclone;
+#X declare -lib cyclone;
+#X declare -lib cyclone;
+#X declare -lib cyclone;
+#X declare -lib cyclone;
+#X declare -lib cyclone;
+#X declare -lib cyclone;
+#X declare -lib cyclone;
+#X declare -lib cyclone;
+#X declare -lib cyclone;
+#X declare -lib cyclone;
+#X declare -lib cyclone;
+#X declare -lib cyclone;
+#X declare -lib cyclone;
+#X declare -lib cyclone;
+#X declare -lib cyclone;
+#X declare -lib cyclone;
+#X obj 6 36 cnv 15 383 318 empty empty SynthesizerModule 2 10 1 10
+-195832 -16662 0;
+#X obj 338 36 nbx 5 11 1 16 0 0 empty empty MIDI_Ch 0 18 0 9 -262144
+-1 -1 1 256;
+#X obj 686 35 r midiStream;
+#X obj 581 35 loadbang;
+#X obj 581 57 f \$1;
+#N canvas 0 22 450 300 channelSplitter 0;
+#X obj 182 95 & 15;
+#X obj 182 57 unpack 0 0 0;
+#X obj 222 95 pack 0 0 0;
+#X obj 222 165 spigot;
+#X obj 182 133 ==;
+#X obj 138 96 inlet;
+#X obj 222 193 outlet;
+#X text 278 193 <-- MIDI Channel Stream;
+#X text 28 96 MIDI Channel -->;
+#X obj 182 35 inlet;
+#X text 78 35 MIDI Stream -->;
+#X connect 0 0 4 0;
+#X connect 1 0 0 0;
+#X connect 1 0 2 0;
+#X connect 1 1 2 1;
+#X connect 1 2 2 2;
+#X connect 2 0 3 0;
+#X connect 3 0 6 0;
+#X connect 4 0 3 1;
+#X connect 5 0 4 1;
+#X connect 9 0 1 0;
+#X restore 581 164 pd channelSplitter;
+#X obj 615 332 mtof;
+#X obj 683 332 / 127;
+#X obj 201 9 r \$0-OSC;
+#X text 646 333 freq.;
+#X text 719 333 amp.;
+#N canvas 0 22 450 300 noteOnSplitter 0;
+#X obj 45 123 list-moses 144 0;
+#X obj 45 155 list-moses 145 0;
+#X obj 263 106 + 144;
+#X msg 263 85 \$1;
+#X msg 303 85 \$1;
+#X obj 303 106 + 145;
+#X text 305 64 <-- MIDI Channel used;
+#X obj 45 79 inlet;
+#X obj 263 57 inlet;
+#X obj 150 208 outlet;
+#X connect 0 1 1 0;
+#X connect 1 0 9 0;
+#X connect 2 0 0 1;
+#X connect 3 0 2 0;
+#X connect 4 0 5 0;
+#X connect 5 0 1 1;
+#X connect 7 0 0 0;
+#X connect 8 0 3 0;
+#X connect 8 0 4 0;
+#X restore 581 230 pd noteOnSplitter;
+#X obj 581 251 unpack 0 0 0;
+#X obj 324 36 tgl 11 0 empty empty empty 17 7 0 10 -195832 -16662 -16662
+1 1;
+#X obj 686 77 spigot;
+#X obj 362 420 bng 20 250 50 0 empty empty AllNotesOff 0 -6 0 10 -262144
+-1 -1;
+#X obj 362 474 s \$0-OSC;
+#X msg 362 448 /*/global/allnotesoff 1;
+#X obj 362 364 r activeSensing;
+#X obj 615 286 ../sustainpedal/sustainpedal;
+#X text 587 187 <-- MIDI Channel Splitted Stream;
+#X obj 581 85 s \$0-MIDIch;
+#X obj 581 128 r \$0-MIDIch;
+#X obj 806 193 r \$0-MIDIch;
+#N canvas 748 131 450 300 sustainSplitter 0;
+#X msg 263 85 \$1;
+#X msg 303 85 \$1;
+#X text 305 64 <-- MIDI Channel used;
+#X obj 45 79 inlet;
+#X obj 263 57 inlet;
+#X obj 210 258 outlet;
+#X obj 45 123 list-moses 176 0;
+#X obj 45 155 list-moses 177 0;
+#X obj 263 106 + 176;
+#X obj 303 106 + 177;
+#X obj 65 190 list-moses 64 1;
+#X obj 65 214 list-moses 65 1;
+#X connect 0 0 8 0;
+#X connect 1 0 9 0;
+#X connect 3 0 6 0;
+#X connect 4 0 0 0;
+#X connect 4 0 1 0;
+#X connect 6 1 7 0;
+#X connect 7 0 10 0;
+#X connect 8 0 6 1;
+#X connect 9 0 7 1;
+#X connect 10 1 11 0;
+#X connect 11 0 5 0;
+#X restore 701 230 pd sustainSplitter;
+#X obj 701 251 unpack 0 0 0;
+#X obj 215 282 polywavesynth/sssadpanel;
+#X obj 8 62 polywavesynth/polywavesynth chan\$1 \$2 1;
+#X obj 395 265 r \$0-preset;
+#N canvas 0 22 690 509 presets 0;
+#X msg 273 12 ../presets/presetschan\$1/Default;
+#X obj 1 1 cnv 10 168 11 empty empty Default 2 5 0 9 -158382 -16662
+0;
+#X obj 1 15 cnv 10 168 11 empty empty Clavish 2 5 0 9 -158382 -16662
+0;
+#X obj 1 29 cnv 10 168 11 empty empty FatBottom 2 5 0 9 -158382 -16662
+0;
+#X obj 1 43 cnv 10 168 11 empty empty FormantBass 2 5 0 9 -158382 -16662
+0;
+#X obj 1 57 cnv 10 168 11 empty empty Gnarl 2 5 0 9 -158382 -16662
+0;
+#X obj 1 71 cnv 10 168 11 empty empty MetalNoSustain 2 5 0 9 -158382
+-16662 0;
+#X obj 1 85 cnv 10 168 11 empty empty MoreMod 2 5 0 9 -158382 -16662
+0;
+#X obj 1 99 cnv 10 168 11 empty empty MoreQ 2 5 0 9 -158382 -16662
+0;
+#X obj 1 113 cnv 10 168 11 empty empty Ploing 2 5 0 9 -158382 -16662
+0;
+#X obj 1 127 cnv 10 168 11 empty empty ResonantNoiseMod 2 5 0 9 -158382
+-16662 0;
+#X obj 154 1 bng 11 250 50 0 empty empty empty 17 7 0 10 -195832 -158382
+-1;
+#X obj 154 15 bng 11 250 50 0 empty empty empty 17 7 0 10 -195832 -158382
+-1;
+#X obj 154 29 bng 11 250 50 0 empty empty empty 17 7 0 10 -195832 -158382
+-1;
+#X obj 154 43 bng 11 250 50 0 empty empty empty 17 7 0 10 -195832 -158382
+-1;
+#X obj 154 57 bng 11 250 50 0 empty empty empty 17 7 0 10 -195832 -158382
+-1;
+#X obj 154 99 bng 11 250 50 0 empty empty empty 17 7 0 10 -195832 -158382
+-1;
+#X obj 154 71 bng 11 250 50 0 empty empty empty 17 7 0 10 -195832 -158382
+-1;
+#X obj 154 85 bng 11 250 50 0 empty empty empty 17 7 0 10 -195832 -158382
+-1;
+#X obj 154 113 bng 11 250 50 0 empty empty empty 17 7 0 10 -195832
+-158382 -1;
+#X obj 154 127 bng 11 250 50 0 empty empty empty 17 7 0 10 -195832
+-158382 -1;
+#X obj 238 32 f \$1;
+#X obj 238 52 f \$1;
+#X obj 238 72 f \$1;
+#X obj 238 92 f \$1;
+#X obj 238 112 f \$1;
+#X obj 238 132 f \$1;
+#X obj 238 152 f \$1;
+#X obj 238 172 f \$1;
+#X obj 238 192 f \$1;
+#X obj 563 209 s \$0-preset;
+#X obj 238 12 f \$1;
+#X msg 273 32 ../presets/presetschan\$1/Clavish;
+#X msg 273 52 ../presets/presetschan\$1/FatBottom;
+#X msg 273 72 ../presets/presetschan\$1/FormantBass;
+#X msg 273 92 ../presets/presetschan\$1/Gnarl;
+#X msg 273 112 ../presets/presetschan\$1/MetalNoSustain;
+#X msg 273 132 ../presets/presetschan\$1/MoreMod;
+#X msg 273 152 ../presets/presetschan\$1/MoreQ;
+#X msg 273 172 ../presets/presetschan\$1/Ploing;
+#X msg 273 192 ../presets/presetschan\$1/ResonantNoiseMod;
+#X connect 0 0 30 0;
+#X connect 11 0 31 0;
+#X connect 12 0 21 0;
+#X connect 13 0 22 0;
+#X connect 14 0 23 0;
+#X connect 15 0 24 0;
+#X connect 16 0 27 0;
+#X connect 17 0 25 0;
+#X connect 18 0 26 0;
+#X connect 19 0 28 0;
+#X connect 20 0 29 0;
+#X connect 21 0 32 0;
+#X connect 22 0 33 0;
+#X connect 23 0 34 0;
+#X connect 24 0 35 0;
+#X connect 25 0 36 0;
+#X connect 26 0 37 0;
+#X connect 27 0 38 0;
+#X connect 28 0 39 0;
+#X connect 29 0 40 0;
+#X connect 31 0 0 0;
+#X connect 32 0 30 0;
+#X connect 33 0 30 0;
+#X connect 34 0 30 0;
+#X connect 35 0 30 0;
+#X connect 36 0 30 0;
+#X connect 37 0 30 0;
+#X connect 38 0 30 0;
+#X connect 39 0 30 0;
+#X connect 40 0 30 0;
+#X coords 0 -1 1 1 170 139 2 0 0;
+#X restore 215 62 pd presets;
+#X obj 8 479 throw~ audiosignalL;
+#X obj 129 479 throw~ audiosignalR;
+#X obj 8 448 freeverb~;
+#X msg 22 394 bypass \$1;
+#X text 86 398 Bypass Reverb;
+#X obj 22 375 tgl 15 0 empty \$0-bypassReverb empty 17 7 0 10 -262144
+-1 -1 1 1;
+#X obj 36 420 r \$0-reverbParams;
+#X msg 196 364 roomsize \$1;
+#X msg 196 385 damping \$1;
+#X msg 196 406 width \$1;
+#X msg 196 427 wet \$1;
+#X msg 196 448 dry \$1;
+#X obj 251 208 hsl 86 12 0.11 1.1 0 1 empty empty Roomsize 2 6 0 9
+-261689 -1 -1 5800 0;
+#X obj 215 208 nbx 3 12 -1e+37 1e+37 0 0 empty empty empty 0 -7 0 9
+-262144 -1 -1 0.785529 256;
+#X obj 251 222 hsl 86 12 0 2 0 1 empty empty Damping 2 6 0 9 -261689
+-1 -1 4600 0;
+#X obj 215 222 nbx 3 12 -1e+37 1e+37 0 0 empty empty empty 0 -7 0 9
+-262144 -1 -1 1.08235 256;
+#X obj 251 236 hsl 86 12 0 1 0 1 empty empty Width 2 6 0 9 -262130
+-1 -1 4400 0;
+#X obj 215 236 nbx 3 12 -1e+37 1e+37 0 0 empty empty empty 0 -7 0 9
+-262144 -1 -1 0.517647 256;
+#X obj 251 250 hsl 86 12 0 1 0 1 empty empty Wet 2 6 0 9 -204786 -1
+-1 2900 0;
+#X obj 215 250 nbx 3 12 -1e+37 1e+37 0 0 empty empty empty 0 -7 0 9
+-262144 -1 -1 0.341176 256;
+#X obj 251 264 hsl 86 12 0 1 0 1 empty empty Dry 2 6 0 9 -204786 -1
+-1 4200 0;
+#X obj 215 264 nbx 3 12 -1e+37 1e+37 0 0 empty empty empty 0 -7 0 9
+-262144 -1 -1 0.494118 256;
+#X obj 395 246 loadbang;
+#X obj 243 448 s \$0-reverbParams;
+#X obj 615 364 s \$0-frec;
+#X obj 683 364 s \$0-amp;
+#X obj 8 9 r \$0-frec;
+#X obj 72 9 r \$0-amp;
+#X obj 346 263 tgl 12 0 \$0-bypassReverb empty Bypass 0 -8 0 9 -203904
+-1 -1 1 1;
+#X text 343 236 Reverb;
+#X obj 260 9 s \$0-MIDItgl;
+#X obj 436 403 r \$0-MIDItgl;
+#X obj 759 60 r \$0-MIDItgl;
+#X obj 431 19 + 1;
+#X obj 431 47 - 1;
+#X connect 1 0 15 0;
+#X connect 1 0 64 0;
+#X connect 2 0 14 0;
+#X connect 3 0 4 0;
+#X connect 4 0 21 0;
+#X connect 4 0 63 0;
+#X connect 5 0 11 0;
+#X connect 5 0 24 0;
+#X connect 6 0 54 0;
+#X connect 7 0 55 0;
+#X connect 8 0 27 3;
+#X connect 11 0 12 0;
+#X connect 12 1 19 0;
+#X connect 12 2 19 1;
+#X connect 13 0 60 0;
+#X connect 14 0 5 1;
+#X connect 15 0 17 0;
+#X connect 17 0 16 0;
+#X connect 18 0 15 0;
+#X connect 19 0 6 0;
+#X connect 19 1 7 0;
+#X connect 22 0 5 0;
+#X connect 23 0 24 1;
+#X connect 23 0 11 1;
+#X connect 24 0 25 0;
+#X connect 25 2 19 2;
+#X connect 27 0 32 0;
+#X connect 27 1 32 1;
+#X connect 28 0 26 0;
+#X connect 32 0 30 0;
+#X connect 32 1 31 0;
+#X connect 33 0 32 0;
+#X connect 35 0 33 0;
+#X connect 36 0 32 0;
+#X connect 37 0 53 0;
+#X connect 38 0 53 0;
+#X connect 39 0 53 0;
+#X connect 40 0 53 0;
+#X connect 41 0 53 0;
+#X connect 42 0 43 0;
+#X connect 43 0 37 0;
+#X connect 44 0 45 0;
+#X connect 45 0 38 0;
+#X connect 46 0 47 0;
+#X connect 47 0 39 0;
+#X connect 48 0 49 0;
+#X connect 49 0 40 0;
+#X connect 50 0 51 0;
+#X connect 51 0 41 0;
+#X connect 52 0 58 0;
+#X connect 56 0 27 0;
+#X connect 57 0 27 1;
+#X connect 61 0 15 0;
+#X connect 62 0 14 1;
+#X connect 63 0 1 0;
+#X connect 64 0 21 0;
+#X coords 0 -1 1 1 385 320 2 5 35;

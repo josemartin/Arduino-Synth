@@ -1,0 +1,28 @@
+#N canvas 872 137 488 367 10;
+#X obj 109 134 openpanel;
+#X obj 103 209 t b s;
+#X obj 39 219 loadbang;
+#X obj 101 100 bng 18 250 50 0 empty empty open_folder 20 9 0 12 -260097
+-1 -1;
+#X obj 55 250 del 1;
+#X obj 94 176 splitfilename;
+#X obj 201 100 tgl 18 0 empty empty max 20 8 0 12 -260097 -1 -1 0 1
+;
+#X obj 113 309 outlet filename;
+#X obj 237 311 outlet max;
+#X msg 127 273 set \$1;
+#X msg 224 274 set \$1;
+#X obj 70 282 t b b;
+#X connect 0 0 5 0;
+#X connect 1 0 7 0;
+#X connect 1 1 9 0;
+#X connect 2 0 4 0;
+#X connect 3 0 0 0;
+#X connect 4 0 11 0;
+#X connect 5 0 1 0;
+#X connect 6 0 10 0;
+#X connect 9 0 7 0;
+#X connect 10 0 8 0;
+#X connect 11 0 7 0;
+#X connect 11 1 8 0;
+#X coords 0 -1 1 1 144 18 2 100 100;

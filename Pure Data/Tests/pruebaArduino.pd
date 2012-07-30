@@ -1,0 +1,65 @@
+#N canvas 557 72 636 507 10;
+#X obj 20 30 as_arduinoReciever;
+#N canvas 581 295 699 339 open 0;
+#X obj 6 7 cnv 10 218 73 empty empty empty 2 5 0 9 -158382 -16662 0
+;
+#N canvas 712 172 480 385 open 0;
+#X obj 6 6 cnv 10 218 11 empty empty OpenCOMportNum: 2 5 0 9 -158382
+-16662 0;
+#X obj 177 6 nbx 5 11 0 256 0 1 empty empty empty 0 18 0 9 -262144
+-1 -1 2 256;
+#X msg 163 60 open \$1;
+#X obj 163 6 bng 11 250 50 0 empty empty empty 17 7 0 10 -195832 -158382
+-1;
+#X obj 163 39 float;
+#X obj 163 95 send openComPort;
+#X connect 1 0 4 1;
+#X connect 2 0 5 0;
+#X connect 3 0 4 0;
+#X connect 4 0 2 0;
+#X coords 0 -1 1 1 220 15 2 5 5;
+#X restore 5 5 pd open port;
+#N canvas 712 172 480 385 open 0;
+#X obj 6 6 cnv 10 218 11 empty empty ToggleAudioComputing: 2 5 0 9
+-158382 -16662 0;
+#X obj 163 6 tgl 11 0 empty empty empty 17 7 0 10 -195832 -16662 -16662
+1 1;
+#X obj 163 32 send toggleAudioComputing;
+#X connect 1 0 2 0;
+#X coords 0 -1 1 1 220 15 2 5 5;
+#X restore 5 35 pd open port;
+#N canvas 566 282 480 385 open 0;
+#X obj 6 6 cnv 10 218 11 empty empty ToggleActiveSensing: 2 5 0 9 -158382
+-16662 0;
+#X obj 163 6 tgl 11 0 empty empty empty 17 7 0 10 -195832 -16662 -16662
+1 1;
+#X obj 163 32 send toggleActiveSensing;
+#X obj 163 -16 loadbang;
+#X connect 1 0 2 0;
+#X connect 3 0 1 0;
+#X coords 0 -1 1 1 220 15 2 5 5;
+#X restore 5 50 pd open port;
+#N canvas 712 172 480 385 open 0;
+#X obj 6 6 cnv 10 218 11 empty empty CloseCOMport: 2 5 0 9 -158382
+-16662 0;
+#X obj 163 6 bng 11 250 50 0 empty empty empty 17 7 0 10 -195832 -158382
+-1;
+#X obj 163 95 send openComPort;
+#X msg 163 60 close;
+#X connect 1 0 3 0;
+#X connect 3 0 2 0;
+#X coords 0 -1 1 1 220 15 2 5 5;
+#X restore 5 20 pd open port;
+#N canvas 273 206 480 385 open 0;
+#X obj 6 6 cnv 10 218 11 empty empty ToggleMIDILog: 2 5 0 9 -158382
+-16662 0;
+#X obj 163 6 tgl 11 0 empty empty empty 17 7 0 10 -195832 -16662 -16662
+1 1;
+#X obj 163 -16 loadbang;
+#X obj 163 32 send toggleMIDILog;
+#X connect 1 0 3 0;
+#X connect 2 0 1 0;
+#X coords 0 -1 1 1 220 15 2 5 5;
+#X restore 5 65 pd open port;
+#X coords 0 -1 1 1 220 75 2 5 5;
+#X restore 20 60 pd open port;

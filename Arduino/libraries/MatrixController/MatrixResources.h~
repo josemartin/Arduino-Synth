@@ -1,0 +1,34 @@
+/*
+  MatrixResources.h - Collection of functions to control a RGB LED matrix
+
+  J. Martin, S. Lopez
+*/
+#ifndef MatrixResources_h
+#define MatrixResources_h
+
+#include "Arduino.h"
+
+
+extern uint16_t _colorsal[3];
+
+
+  
+  
+class PopVisualization
+{
+  public:
+    PopVisualization();
+    void setPixel(int row, int col,int r, int g, int b);
+    void setRow(int row,int r, int g, int b);
+    void setMatrix(int r, int g, int b);
+    uint16_t getPixelR(int row, int num);
+    uint16_t getPixelG(int row, int num);
+    uint16_t getPixelB(int row, int num);
+    void shiftFila (int row);
+    
+    uint8_t newItem(uint8_t level);
+  private:
+    void setDot(uint8_t level, uint8_t posX, uint8_t posY);
+};
+
+#endif

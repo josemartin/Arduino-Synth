@@ -1,0 +1,56 @@
+#N canvas 927 337 753 448 10;
+#X obj 228 321 tabplay~;
+#X obj 329 263 arraysize;
+#X obj 329 289 / 44.1;
+#X obj 259 293 metro;
+#X obj 254 238 tgl 20 0 empty empty empty 17 7 0 10 -4034 -1 -1 0 1
+;
+#X msg 187 277 set \$1;
+#X obj 233 399 dac~;
+#X obj 238 369 *~ 0.5;
+#X text 8 11 1st step. Load a folder with wav files by choosing any
+file in that folder;
+#X text 240 92 2nd step. Load a wav file from that folder.;
+#X text 345 117 3rd step: toggle the metro on (the green TOGGLE);
+#X msg 535 11 \; pd dsp 1 \;;
+#X obj 318 221 t b b s;
+#X obj 263 268 f;
+#X obj 9 50 cnv 15 160 100 empty empty empty 20 12 0 14 -261682 -66577
+0;
+#X obj 15 61 samplemap/memopenfolder;
+#X obj 15 127 samplemap/loadfolder;
+#X msg 125 105 0;
+#X obj 228 110 cnv 15 111 100 empty empty empty 20 12 0 14 -261682
+-66577 0;
+#X obj 236 120 samplemap/memopenpanel;
+#X obj 236 190 samplemap/load;
+#X msg 306 167 0;
+#X text 355 188 4th step. Load a different wav file from that folder.
+Notice how the audio rendering does not skip.;
+#X msg 236 142;
+#X msg 15 84;
+#X text 322 356 5th step. Save this patch \, quit PD \, open this patch
+again and skip to step 3 The previous folder location should've been
+saved and reloaded automatically.;
+#X connect 0 0 7 0;
+#X connect 1 0 2 0;
+#X connect 2 0 3 1;
+#X connect 3 0 0 0;
+#X connect 4 0 13 0;
+#X connect 5 0 0 0;
+#X connect 7 0 6 0;
+#X connect 7 0 6 1;
+#X connect 12 0 13 0;
+#X connect 12 1 1 0;
+#X connect 12 2 1 1;
+#X connect 13 0 3 0;
+#X connect 15 0 24 0;
+#X connect 15 1 17 0;
+#X connect 17 0 16 1;
+#X connect 19 0 23 0;
+#X connect 19 1 21 0;
+#X connect 20 0 5 0;
+#X connect 20 0 12 0;
+#X connect 21 0 20 1;
+#X connect 23 0 20 0;
+#X connect 24 0 16 0;

@@ -1,0 +1,105 @@
+#N canvas 666 62 536 489 10;
+#X obj 100 150 tgl 18 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+1;
+#X obj 100 173 tgl 18 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 33 150 loadbang;
+#X msg 33 170 0;
+#X obj 100 -45 inlet;
+#X obj 188 79 list;
+#X obj 209 -45 inlet;
+#X obj 181 350 outlet;
+#X obj 222 301 pack 0 0;
+#X obj 181 328 spigot;
+#X text 228 328 <-- 1st Check - ON/OFF;
+#X obj 267 206 expr $f1+20*$f2;
+#X obj 100 196 nbx 1 15 -2 2 0 0 empty empty empty 0 18 0 9 -262144
+-1 -1 0 256;
+#X obj 100 216 nbx 1 15 -12 12 0 0 empty empty empty 0 18 0 9 -262144
+-1 -1 0 256;
+#X obj 100 236 nbx 1 15 1 8 0 0 empty empty empty 0 18 0 9 -262144
+-1 -1 1 256;
+#X msg 33 205 1;
+#X obj 222 254 expr $f1+($f2*12)+$f3;
+#X obj 209 -24 route resetBuffers;
+#X obj 30 253 s \$0-noteOrder;
+#X obj 188 174 unpack 0 0 0;
+#X obj 209 -1 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 136 -43 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 188 147 route symbol bang;
+#X text 225 -1 Reset;
+#X obj 287 87 r \$0-noteOrder;
+#X text 261 -1 --> Clear buffers when lastNoteOFF;
+#X text 296 147 Cleans bangs and symbols from resets;
+#N canvas 0 22 450 300 noteOrderCheck 0;
+#X obj 136 74 inlet;
+#X obj 232 74 inlet;
+#X obj 136 144 outlet;
+#X obj 136 97 list-moses 1 0;
+#X obj 136 118 list-moses 2 0;
+#X obj 232 97 + 1;
+#X text 226 118 Note Order Check;
+#X connect 0 0 3 0;
+#X connect 1 0 5 0;
+#X connect 1 0 3 1;
+#X connect 3 1 4 0;
+#X connect 4 0 2 0;
+#X connect 5 0 4 1;
+#X restore 188 108 pd noteOrderCheck;
+#X obj 328 41 r \$0-noteOrder;
+#N canvas 0 22 450 300 noteOrderCheck 0;
+#X obj 136 74 inlet;
+#X obj 232 74 inlet;
+#X obj 136 144 outlet;
+#X obj 136 97 list-moses 1 0;
+#X obj 136 118 list-moses 2 0;
+#X obj 232 97 + 1;
+#X text 226 118 Note Order Check;
+#X connect 0 0 3 0;
+#X connect 1 0 5 0;
+#X connect 1 0 3 1;
+#X connect 3 1 4 0;
+#X connect 4 0 2 0;
+#X connect 5 0 4 1;
+#X restore 229 62 pd noteOrderCheck;
+#X text 337 69 Double Note Order Check;
+#X text 38 382 NOTA: Si guardamos todas las notas de cada uno de los
+órdenes en un array de 8 notas \, podríamos cambiar on-the-fly de orden
+;
+#X obj 222 274 clip 0 127;
+#X obj 267 226 clip 0 127;
+#X connect 0 0 9 1;
+#X connect 1 0 11 1;
+#X connect 2 0 3 0;
+#X connect 2 0 15 0;
+#X connect 3 0 0 0;
+#X connect 3 0 1 0;
+#X connect 3 0 12 0;
+#X connect 3 0 13 0;
+#X connect 4 0 21 0;
+#X connect 5 0 27 0;
+#X connect 6 0 17 0;
+#X connect 8 0 9 0;
+#X connect 9 0 7 0;
+#X connect 11 0 33 0;
+#X connect 12 0 16 1;
+#X connect 13 0 16 2;
+#X connect 14 0 18 0;
+#X connect 15 0 14 0;
+#X connect 16 0 32 0;
+#X connect 17 0 20 0;
+#X connect 17 1 29 0;
+#X connect 19 1 16 0;
+#X connect 19 2 11 0;
+#X connect 20 0 5 1;
+#X connect 21 0 5 0;
+#X connect 22 2 19 0;
+#X connect 24 0 27 1;
+#X connect 27 0 22 0;
+#X connect 28 0 29 1;
+#X connect 29 0 5 1;
+#X connect 32 0 8 0;
+#X connect 33 0 8 1;
+#X coords 0 -1 1 1 18 101 2 100 150;

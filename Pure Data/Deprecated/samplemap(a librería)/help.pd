@@ -1,0 +1,163 @@
+#N canvas 240 90 1072 567 10;
+#X obj -25 131 openpanel;
+#X obj -25 92 bng 15 250 50 0 empty empty load_wav_file 17 7 0 10 -262144
+-1 -1;
+#X obj 56 124 tgl 15 0 empty empty remax_array_beyond_4000000_samples
+17 7 0 10 -262144 -1 -1 0 1;
+#X msg -25 198 set \$1;
+#X obj -25 239 tabplay~;
+#X obj -25 275 dac~;
+#X obj 25 214 bng 15 250 50 0 empty empty play 17 7 0 10 -262144 -1
+-1;
+#X obj -23 444 samplemap/Samplemap;
+#X obj 539 192 cnv 15 111 100 empty empty empty 20 12 0 14 -261682
+-66577 0;
+#X obj 547 202 samplemap/memopenpanel;
+#X msg 547 224;
+#X text 664 227 copy and paste this to your patch to set files for
+preloading;
+#X obj 540 300 cnv 15 160 100 empty empty empty 20 12 0 14 -261682
+-66577 0;
+#X obj 546 311 samplemap/memopenfolder;
+#X msg 546 334;
+#X text 706 310 <- [samplemap/memopenfolder];
+#X text 655 201 <-[samplemap/memopenpanel];
+#X text 706 332 copy and paste this to your patch to set folders for
+preloading;
+#N canvas 294 433 631 426 example 0;
+#X text 35 23 This 3 instances will automatically load files file1.wav
+\, file2.wav and file3.wav (if they existed) at load time.;
+#X text 50 222 This 2 instances will automatically load all wav files
+in folder1 and folder2 (if they existed) at load time.;
+#X obj 41 72 cnv 15 111 100 empty empty empty 20 12 0 14 -261682 -66577
+0;
+#X obj 49 82 samplemap/memopenpanel;
+#X obj 49 152 samplemap/load;
+#X msg 119 129 0;
+#X obj 165 75 cnv 15 111 100 empty empty empty 20 12 0 14 -261682 -66577
+0;
+#X obj 173 85 samplemap/memopenpanel;
+#X obj 173 155 samplemap/load;
+#X msg 243 132 0;
+#X obj 294 75 cnv 15 111 100 empty empty empty 20 12 0 14 -261682 -66577
+0;
+#X obj 302 85 samplemap/memopenpanel;
+#X obj 302 155 samplemap/load;
+#X msg 372 132 0;
+#X obj 40 263 cnv 15 160 100 empty empty empty 20 12 0 14 -261682 -66577
+0;
+#X obj 46 274 samplemap/memopenfolder;
+#X obj 46 340 samplemap/loadfolder;
+#X msg 156 318 0;
+#X obj 214 263 cnv 15 160 100 empty empty empty 20 12 0 14 -261682
+-66577 0;
+#X obj 220 274 samplemap/memopenfolder;
+#X obj 220 340 samplemap/loadfolder;
+#X msg 330 318 0;
+#X msg 220 297 folder2;
+#X text 34 371 This patch uses [openpanel] which only allows you to
+open files. Just choose any file in the folder you want to load.;
+#X msg 46 297 folder1;
+#X msg 49 104 file1.wav;
+#X msg 173 107 file2.wav;
+#X msg 302 107 file3.wav;
+#X connect 3 0 25 0;
+#X connect 3 1 5 0;
+#X connect 5 0 4 1;
+#X connect 7 0 26 0;
+#X connect 7 1 9 0;
+#X connect 9 0 8 1;
+#X connect 11 0 27 0;
+#X connect 11 1 13 0;
+#X connect 13 0 12 1;
+#X connect 15 0 24 0;
+#X connect 15 1 17 0;
+#X connect 17 0 16 1;
+#X connect 19 0 22 0;
+#X connect 19 1 21 0;
+#X connect 21 0 20 1;
+#X connect 22 0 20 0;
+#X connect 24 0 16 0;
+#X connect 25 0 4 0;
+#X connect 26 0 8 0;
+#X connect 27 0 12 0;
+#X restore 541 406 pd example;
+#X obj -30 343 openpanel;
+#X obj -30 320 bng 15 250 50 0 empty empty load_wav_file 17 7 0 10
+-262144 -1 -1;
+#X obj 87 349 tgl 15 0 empty empty remax 17 7 0 10 -262144 -1 -1 0
+1;
+#X text 72 156 1st outlet outputs list of array names;
+#X text 72 186 2nd outlet outputs # of channels.;
+#X text 99 169 (one per channel);
+#X obj 546 377 samplemap/loadfolder;
+#X text 525 20 Author: Paulo Casaes;
+#X text 142 336 Like [samplemap/load] but loads all wav files in the
+folder.;
+#X text 532 102 The memo objects work by altering the message box beneath
+them. At load time it bangs it. Once a file/folder is selected just
+save the patch. Next time it is opened it will reload those files.
+;
+#X obj 547 272 samplemap/load;
+#X text 108 224 [samplemap/load] is the object to use in your patch.
+Just hook it up to your tab objects with a set message.;
+#X text 142 358 this patch uses [openpanel] which only allows you to
+open files. Just choose any file of the folder you want to load.;
+#X obj 541 435 samplemap/help-example;
+#X text 609 404 A descriptive example of memopenpanel and memopenfolder
+;
+#X text 683 435 A practical example of memeopenpanel and memopenfolder
+;
+#N canvas 0 22 444 344 CAVEATS 0;
+#X text 17 115 The search for the filename uses a linear search algorithm.
+It would get exceedingly slow after the first 10000 or so files \,
+but by then your computer would have run out of memory anyway... maybe.
+;
+#X text 18 41 Only works with wav files. Is dependent on soundfile_info.
+;
+#X text 17 65 Once loaded \, a wav file can not be unloaded or reloaded
+until samplemap-int is restarted. The only safe way of doing this is
+by restarting PD or closing all patches.;
+#X text 15 185 If the same wav file is in more than one folder they
+will be considered different files since directory position is used
+in the mapping.;
+#X restore 540 491 pd CAVEATS;
+#X obj -25 163 samplemap/load;
+#X obj -30 379 samplemap/loadfolder;
+#X msg 617 249 0;
+#X msg 656 355 0;
+#X text -23 468 Loads [samplemap/samplemap-int] patch only once. Not
+explicitly required since [samplemap/load] already loads it. [samplemap/samplemap-int]
+is responsible for managing the filenames and arrays.;
+#X text 535 35 ver 1 \, 2009-12-15;
+#N canvas 89 353 463 198 HOW_TO_INSTALL 0;
+#X text 34 31 For these patches to work the samplemap folder (not its
+content) must reside inside a folder in PD's path.;
+#X text 36 67 Example: On a Mac or Linux box create the folder ~/Library/Pd
+and place samplemap there. Then add ~/Library/Pd to PD path through
+Preferences->Path . hint: ~ is your home folder.;
+#X restore -21 18 pd HOW_TO_INSTALL;
+#X text 108 19 These patches are meant to be used in conjunction with
+a file loading style sampler/looper. It works by pre-loading all necessary
+wav files before hand so that BLOCK IO issues (the second or so audio
+pause that occurs while soundfiler loads a file) can be avoided during
+performance.;
+#X connect 0 0 36 0;
+#X connect 1 0 0 0;
+#X connect 2 0 36 1;
+#X connect 3 0 4 0;
+#X connect 4 0 5 0;
+#X connect 4 0 5 1;
+#X connect 6 0 4 0;
+#X connect 9 0 10 0;
+#X connect 9 1 38 0;
+#X connect 10 0 29 0;
+#X connect 13 0 14 0;
+#X connect 13 1 39 0;
+#X connect 14 0 25 0;
+#X connect 19 0 37 0;
+#X connect 20 0 19 0;
+#X connect 21 0 37 1;
+#X connect 36 0 3 0;
+#X connect 38 0 29 1;
+#X connect 39 0 25 1;

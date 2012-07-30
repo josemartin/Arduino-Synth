@@ -1,0 +1,18 @@
+#N canvas 96 117 597 300 10;
+#X obj 31 44 inlet;
+#X obj 34 123 makefilename %s/*.wav;
+#X obj 37 152 folder_list;
+#X obj 134 47 inlet;
+#X text 182 72 inlet 2: Remax array. Must be either 0 or 1 If 1 it
+will load the entire wav onto memory instead of limiting it to 4e+06
+samples. This parameter is optional \, default is 0;
+#X text 182 49 inlet 1: A folder to be loaded \, it is required.;
+#X obj 36 71 spacefix;
+#X obj 43 242 load;
+#X obj 54 95 splitfilename;
+#X connect 0 0 6 0;
+#X connect 1 0 2 0;
+#X connect 2 0 7 0;
+#X connect 3 0 7 1;
+#X connect 6 0 8 0;
+#X connect 8 0 1 0;

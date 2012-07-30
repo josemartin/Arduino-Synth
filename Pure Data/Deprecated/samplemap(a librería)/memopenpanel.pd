@@ -1,0 +1,31 @@
+#N canvas 966 266 512 303 10;
+#X obj 109 134 openpanel;
+#X obj 109 164 t b s;
+#X obj 52 182 loadbang;
+#X obj 101 100 bng 18 250 50 0 empty empty open 20 8 0 12 -260097 -1
+-1;
+#X obj 68 213 del 1;
+#X obj 151 100 tgl 18 0 empty empty max 20 8 0 12 -260097 -1 -1 0 1
+;
+#X text 48 3 This patch facilitates the preloading of a wav file. Used
+in cojunction with a message it box it can save filenames on a patch
+to be loaded when opened.;
+#X text 51 50 With max enabled it will load wav files larger than 4e+06
+samples.;
+#X obj 119 257 outlet file;
+#X obj 215 257 outlet max;
+#X msg 133 221 set \$1;
+#X msg 208 218 set \$1;
+#X obj 73 235 t b b;
+#X connect 0 0 1 0;
+#X connect 1 0 8 0;
+#X connect 1 1 10 0;
+#X connect 2 0 4 0;
+#X connect 3 0 0 0;
+#X connect 4 0 12 0;
+#X connect 5 0 11 0;
+#X connect 10 0 8 0;
+#X connect 11 0 9 0;
+#X connect 12 0 8 0;
+#X connect 12 1 9 0;
+#X coords 0 -1 1 1 93 18 2 100 100;
