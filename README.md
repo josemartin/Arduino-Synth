@@ -1,6 +1,7 @@
-ºARDUINO SYNTH
+ARDUINO SYNTH
 -------------
-Práctica especial LSED
+Práctica especial Laboratorio de Sistemas Electrónicos Digitales (LSED)
+2011-2012 
 Release final
 
 Para su uso con:
