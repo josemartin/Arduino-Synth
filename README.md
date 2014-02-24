@@ -6,9 +6,9 @@ Release final
 
 Para su uso con:
 
--Arduino IDE http://www.arduino.cc/
+    -Arduino IDE http://www.arduino.cc/
 
--Puredata (compilación Pd-extended) http://puredata.info/
+    -Puredata (compilación Pd-extended) http://puredata.info/
 
 Contenidos:
 
