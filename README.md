@@ -1,6 +1,7 @@
 ARDUINO SYNTH
 -------------
-Práctica especial Laboratorio de Sistemas Electrónicos Digitales (LSED)
+Práctica especial Laboratorio de Sistemas Electrónicos Digitales (LSED) 
+
 2011-2012 
 Release final
 
